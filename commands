@@ -1,0 +1,2 @@
+//Create App
+yarn create react-app expensis-web --template typescript

@@ -1,0 +1,12 @@
+.mainHeader {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  background: rgb(163, 130, 224);
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.mainHeader h1 {
+  color: white;
+}
