@@ -1,12 +1,18 @@
-.mainHeader {
+.main-header {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 4rem;
   align-items: center;
-  background: rgb(163, 130, 224);
-  padding: 0 2rem;
+  background: rgb(63, 112, 80);
+  padding: 0 4rem;
+  margin: 0;
   justify-content: space-between;
 }
 
-.mainHeader h1 {
+.main-header h1 a {
   color: white;
+  text-decoration: none;
 }

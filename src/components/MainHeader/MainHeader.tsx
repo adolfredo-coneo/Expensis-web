@@ -1,16 +1,16 @@
+import { Link } from "react-router-dom";
 import classes from "./MainHeader.module.css";
 import Navigation from "./Navigation";
 
-interface Props {
-    
-}
-const MainHeader = (props: Props) => {
-    return (
-        <header className={classes.mainHeader}>
-            <h1>Expensis App</h1>
-            <Navigation />
-        </header>
-    )
-}
+const MainHeader = () => {
+  return (
+    <div className={classes["main-header"]}>
+      <h1>
+        <Link to="/">eXpensis</Link>
+      </h1>
+      <Navigation />
+    </div>
+  );
+};
 
-export default MainHeader
+export default MainHeader;

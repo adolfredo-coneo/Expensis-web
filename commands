@@ -1,2 +1,14 @@
 //Create App
 yarn create react-app expensis-web --template typescript
+
+//React Router
+yarn add react-router-dom
+yarn add -D @types/react-router-dom
+
+//GIT
+git init
+git add .
+git commit -m "Initializing Repo"
+git branch -M main
+git remote add origin https://github.com/adolfredo-coneo/Expensis-web.git
+git push -u origin main

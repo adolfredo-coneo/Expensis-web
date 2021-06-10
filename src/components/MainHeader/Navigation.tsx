@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import classes from "./Navigation.module.css";
 
 interface Props {}
@@ -7,10 +8,14 @@ const Navigation = (props: Props) => {
     <nav className={classes.nav}>
       <ul>
         <li>
-          <a href="/">Register</a>
+          <NavLink to="/register" className={classes.link} activeClassName={classes.active}>
+            Register
+          </NavLink>
         </li>
         <li>
-          <a href="/">Login</a>
+          <NavLink to="/login" className={classes.link} activeClassName={classes.active}>
+            Login
+          </NavLink>
         </li>
       </ul>
     </nav>

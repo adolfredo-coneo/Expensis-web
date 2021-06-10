@@ -9,14 +9,18 @@
 .nav li {
   margin: 0;
   margin-left: 2rem;
+  font-size: larger;
 }
 
-.nav a {
+.link {
   text-decoration: none;
   color: white;
 }
 
 .nav a:hover,
 .nav a:active {
-  color: #6f257e;
+   color: rgb(187, 245, 204);
+}
+.active {
+  color: rgb(23, 231, 12);
 }

@@ -1,0 +1,14 @@
+.features {
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  padding: 0 8rem;
+  grid-template-columns: 40% auto 45%;
+}
+
+.item5 {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
