@@ -38,9 +38,14 @@
   border: 1px solid #ccc;
   padding: 0.55rem;
   width: 100%;
-  background-color: rgb(63, 112, 80);;
+  background-color: rgb(63, 112, 80);
   border-radius: 4px;
   color: white;
+  cursor: pointer;
+}
+
+.button :hover {
+  background-color: rgb(196, 107, 34);;
 }
 
 .logo img {

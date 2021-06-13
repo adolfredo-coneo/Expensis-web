@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import classes from "./Login.module.css";
 
 const loginDataReducer = (
@@ -12,6 +12,7 @@ const loginDataReducer = (
       password: state.password,
       emailIsValid: action.payload?.includes("@"),
       passwordIsValid: state.passwordIsValid,
+      formIsValid: state.formIsValid,
     };
   }
   if (action.type === "EMAIL_INPUT_BLUR") {
@@ -21,6 +22,7 @@ const loginDataReducer = (
       password: state.password,
       emailIsValid: state.email?.includes("@"),
       passwordIsValid: state.passwordIsValid,
+      formIsValid: state.formIsValid,
     };
   }
   if (action.type === "PASSWORD_INPUT") {
@@ -30,6 +32,7 @@ const loginDataReducer = (
       password: action.payload || null,
       emailIsValid: state.emailIsValid,
       passwordIsValid: action.payload!.trim().length > 6,
+      formIsValid: state.formIsValid,
     };
   }
   if (action.type === "PASSWORD_BLUR") {
@@ -39,6 +42,17 @@ const loginDataReducer = (
       password: state.password,
       emailIsValid: state.emailIsValid,
       passwordIsValid: state.password!.trim().length > 6,
+      formIsValid: state.formIsValid,
+    };
+  }
+  if (action.type === "FORM_VALIDATION") {
+    console.log("FORM_VALIDATION");
+    return {
+      email: state.email,
+      password: state.password,
+      emailIsValid: state.emailIsValid,
+      passwordIsValid: state.passwordIsValid,
+      formIsValid: state.emailIsValid && state.passwordIsValid,
     };
   }
   return state;
@@ -50,9 +64,20 @@ const Login = () => {
     emailIsValid: null,
     password: "",
     passwordIsValid: null,
+    formIsValid: false,
   });
+  const { emailIsValid } = loginData;
+  const { passwordIsValid } = loginData;
 
   console.log(loginData);
+
+  useEffect(() => {
+    dispatchLoginData({
+      type: "FORM_VALIDATION",
+    });
+
+    return () => {};
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
@@ -80,6 +105,15 @@ const Login = () => {
     });
   };
 
+  const formSubmitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (loginData.formIsValid) {
+      console.log("Submit");
+    } else {
+      console.log("Form not completed");
+    }
+  };
+
   return (
     <div className={classes.login}>
       <div className={classes.logo}>
@@ -88,7 +122,7 @@ const Login = () => {
       <h1>eXpenses</h1>
       <h2>Access Your Account</h2>
       <section>
-        <form>
+        <form onSubmit={formSubmitHandler}>
           <div className={classes.control}>
             <label htmlFor="email">Email</label>
             <input

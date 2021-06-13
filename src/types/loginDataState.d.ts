@@ -3,4 +3,5 @@ type LoginDataState = {
   emailIsValid?: boolean | null;
   password: string | null;
   passwordIsValid?: boolean | null;
+  formIsValid?: boolean | null;
 };
