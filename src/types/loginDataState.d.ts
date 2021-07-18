@@ -1,7 +1,7 @@
-type LoginDataState = {
-  email: string | null;
-  emailIsValid?: boolean | null;
-  password: string | null;
-  passwordIsValid?: boolean | null;
-  formIsValid?: boolean | null;
+export type LoginDataState = {
+  email: string;
+  emailIsValid: boolean;
+  password: string;
+  passwordIsValid: boolean;
+  formIsValid: boolean;
 };

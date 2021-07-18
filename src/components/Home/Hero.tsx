@@ -20,7 +20,7 @@ const Hero = (props: Props) => {
           accomplishing specific goals. In short, a financial plan is a timeline
           for the big milestones in your life.
         </p>
-        <Link to="/register">Crear una cuenta</Link>
+        <Link to="/register">Create an Account</Link>
       </div>
     </section>
   );

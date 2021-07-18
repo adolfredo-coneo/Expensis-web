@@ -3,7 +3,7 @@ enum ActionKind {
   EMAIL_INPUT_BLUR = "EMAIL_INPUT_BLUR",
 }
 
-type Action = {
+export type Action = {
   type: string;
   payload?: string | null;
 };

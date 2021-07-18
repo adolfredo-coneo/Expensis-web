@@ -1,79 +1,22 @@
-import React, { useEffect, useReducer } from "react";
-import classes from "./Login.module.css";
-
-const loginDataReducer = (
-  state: LoginDataState,
-  action: Action
-): LoginDataState => {
-  if (action.type === "EMAIL_USER_INPUT") {
-    console.log("Email User Input:", action);
-    return {
-      email: action.payload || null,
-      password: state.password,
-      emailIsValid: action.payload?.includes("@"),
-      passwordIsValid: state.passwordIsValid,
-      formIsValid: state.formIsValid,
-    };
-  }
-  if (action.type === "EMAIL_INPUT_BLUR") {
-    console.log("Email User Blur");
-    return {
-      email: state.email,
-      password: state.password,
-      emailIsValid: state.email?.includes("@"),
-      passwordIsValid: state.passwordIsValid,
-      formIsValid: state.formIsValid,
-    };
-  }
-  if (action.type === "PASSWORD_INPUT") {
-    console.log("Password Input:", action);
-    return {
-      email: state.email,
-      password: action.payload || null,
-      emailIsValid: state.emailIsValid,
-      passwordIsValid: action.payload!.trim().length > 6,
-      formIsValid: state.formIsValid,
-    };
-  }
-  if (action.type === "PASSWORD_BLUR") {
-    console.log("Password Blur");
-    return {
-      email: state.email,
-      password: state.password,
-      emailIsValid: state.emailIsValid,
-      passwordIsValid: state.password!.trim().length > 6,
-      formIsValid: state.formIsValid,
-    };
-  }
-  if (action.type === "FORM_VALIDATION") {
-    console.log("FORM_VALIDATION");
-    return {
-      email: state.email,
-      password: state.password,
-      emailIsValid: state.emailIsValid,
-      passwordIsValid: state.passwordIsValid,
-      formIsValid: state.emailIsValid && state.passwordIsValid,
-    };
-  }
-  return state;
-};
+import React, { useEffect, useReducer } from 'react';
+import classes from './Login.module.css';
+import getFirebase from '../../firebase';
+import loginDataReducer from './LoginReducer';
 
 const Login = () => {
   const [loginData, dispatchLoginData] = useReducer(loginDataReducer, {
-    email: "",
-    emailIsValid: null,
-    password: "",
-    passwordIsValid: null,
+    email: '',
+    emailIsValid: false,
+    password: '',
+    passwordIsValid: false,
     formIsValid: false,
   });
   const { emailIsValid } = loginData;
   const { passwordIsValid } = loginData;
 
-  console.log(loginData);
-
   useEffect(() => {
     dispatchLoginData({
-      type: "FORM_VALIDATION",
+      type: 'FORM_VALIDATION',
     });
 
     return () => {};
@@ -81,36 +24,51 @@ const Login = () => {
 
   const emailChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
-      type: "EMAIL_USER_INPUT",
+      type: 'EMAIL_USER_INPUT',
       payload: event.currentTarget.value,
     });
   };
 
   const vaidateEmailHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
-      type: "EMAIL_INPUT_BLUR",
+      type: 'EMAIL_INPUT_BLUR',
     });
   };
 
   const passwordChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
-      type: "PASSWORD_INPUT",
+      type: 'PASSWORD_INPUT',
       payload: event.currentTarget.value,
     });
   };
 
   const vaidatePasswordHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
-      type: "PASSWORD_BLUR",
+      type: 'PASSWORD_BLUR',
     });
   };
 
-  const formSubmitHandler = (event: React.FormEvent) => {
+  const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     if (loginData.formIsValid) {
-      console.log("Submit");
+      const firebaseInstance = getFirebase();
+      //firebase auth username password
+      try {
+        if (firebaseInstance) {
+          const user = await firebaseInstance
+            .auth()
+            .createUserWithEmailAndPassword(
+              loginData.email,
+              loginData.password
+            );
+          console.log('user', user);
+        }
+      } catch (error) {
+        console.log('error', error);
+        alert(error.message);
+      }
     } else {
-      console.log("Form not completed");
+      console.log('Form not completed');
     }
   };
 
