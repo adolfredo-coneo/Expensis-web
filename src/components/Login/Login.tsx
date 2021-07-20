@@ -2,8 +2,11 @@ import React, { useEffect, useReducer } from 'react';
 import classes from './Login.module.css';
 import getFirebase from '../../firebase';
 import loginDataReducer from './LoginReducer';
+import { useAppDispatch } from '../../store/hooks';
+import { layoutActions } from '../../store/slices/layout';
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const [loginData, dispatchLoginData] = useReducer(loginDataReducer, {
     email: '',
     emailIsValid: false,
@@ -50,6 +53,13 @@ const Login = () => {
 
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
+    dispatch(
+      layoutActions.setNotification({
+        message: 'Logging in...',
+        status: 'info',
+        title: 'Processing',
+      })
+    );
     if (loginData.formIsValid) {
       const firebaseInstance = getFirebase();
       //firebase auth username password
@@ -62,6 +72,13 @@ const Login = () => {
               loginData.password
             );
           console.log('user', user);
+          dispatch(
+            layoutActions.setNotification({
+              message: 'User Created...',
+              status: 'success',
+              title: 'Complete',
+            })
+          );
         }
       } catch (error) {
         console.log('error', error);
