@@ -1,8 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
-import classes from './Login.module.css';
 import loginDataReducer from './LoginReducer';
 import { useAppDispatch } from '../../store/hooks';
-import { sendRegistration } from '../../store/actions/registration';
+import { sendLogin } from '../../store/actions/auth';
+import { layoutActions } from '../../store/slices/layout';
+import FormLayout from '../../layout/FormLayout';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -13,8 +14,7 @@ const Login = () => {
     passwordIsValid: false,
     formIsValid: false,
   });
-  const { emailIsValid } = loginData;
-  const { passwordIsValid } = loginData;
+  const { emailIsValid, passwordIsValid, formIsValid } = loginData;
 
   useEffect(() => {
     dispatchLoginData({
@@ -31,12 +31,6 @@ const Login = () => {
     });
   };
 
-  const vaidateEmailHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    dispatchLoginData({
-      type: 'EMAIL_INPUT_BLUR',
-    });
-  };
-
   const passwordChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     dispatchLoginData({
       type: 'PASSWORD_INPUT',
@@ -44,64 +38,51 @@ const Login = () => {
     });
   };
 
-  const vaidatePasswordHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    dispatchLoginData({
-      type: 'PASSWORD_BLUR',
-    });
-  };
-
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (loginData.formIsValid) {
+    if (formIsValid) {
       dispatch(
-        sendRegistration({
-          name: '',
+        sendLogin({
           email: loginData.email,
           password: loginData.password,
         })
       );
     } else {
-      console.log('Form not completed');
+      let message = '';
+      if (!emailIsValid && !passwordIsValid)
+        message = 'Email and password are not valid';
+      else if (!emailIsValid) message = 'Email is not valid';
+      else if (!passwordIsValid) message = 'Password is not valid';
+
+      dispatch(
+        layoutActions.setNotification({
+          message,
+          status: 'error',
+          title: '',
+        })
+      );
     }
   };
 
   return (
-    <div className={classes.login}>
-      <div className={classes.logo}>
-        <img alt="Money Logo" src="../../../images/dollar-logo.png" />
+    <FormLayout title="Access Your Account" submitHandler={formSubmitHandler}>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" required onChange={emailChangeHandler} />
       </div>
-      <h1>eXpenses</h1>
-      <h2>Access Your Account</h2>
-      <section>
-        <form onSubmit={formSubmitHandler}>
-          <div className={classes.control}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              required
-              onChange={emailChangeHandler}
-              onBlur={vaidateEmailHandler}
-            />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              required
-              onChange={passwordChangeHandler}
-              onBlur={vaidatePasswordHandler}
-            />
-          </div>
-          <div className={classes.controlButton}>
-            <button className={classes.button} type="submit">
-              Login
-            </button>
-          </div>
-        </form>
-      </section>
-    </div>
+      <div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          required
+          onChange={passwordChangeHandler}
+        />
+      </div>
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </FormLayout>
   );
 };
 

@@ -1,13 +1,13 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import getFirebase from '../../firebase';
-import { UserModel } from '../../models/User';
+import { Userlogin } from '../../models/User';
 import { layoutActions } from '../slices/layout';
 
-export const sendRegistration = (data: UserModel) => {
+export const sendLogin = (data: Userlogin) => {
   return async (dispatch: Dispatch) => {
     dispatch(
       layoutActions.setNotification({
-        message: 'Creating User...',
+        message: 'Logging in...',
         status: 'info',
         title: '',
       })
@@ -19,11 +19,11 @@ export const sendRegistration = (data: UserModel) => {
       if (firebaseInstance) {
         const user = await firebaseInstance
           .auth()
-          .createUserWithEmailAndPassword(data.email, data.password);
+          .signInWithEmailAndPassword(data.email, data.password);
         console.log('user', user);
         dispatch(
           layoutActions.setNotification({
-            message: 'User Created...',
+            message: 'User Logged In...',
             status: 'success',
             title: 'Complete',
           })

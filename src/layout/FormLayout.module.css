@@ -1,8 +1,22 @@
-.control {
+.formExternal {
+  text-align: center;
+  margin: 6rem auto;
+  padding: 1rem;
+  width: 25rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f4f0fa;
+}
+
+.logo img {
+  width: 40%;
+}
+
+.form div {
   margin-bottom: 0.5rem;
 }
 
-.control label {
+.form label {
   display: block;
   text-transform: capitalize;
   color: #616161;
@@ -10,7 +24,7 @@
   text-align: left;
 }
 
-.control input {
+.form input {
   display: block;
   width: 100%;
   margin: auto;
@@ -19,12 +33,12 @@
   border: 1px solid #ccc;
 }
 
-.controlButton {
+.form section {
   width: 100%;
   text-align: right;
 }
 
-.button {
+.form button {
   border: 1px solid #ccc;
   padding: 0.55rem;
   width: 100%;
@@ -34,6 +48,6 @@
   cursor: pointer;
 }
 
-.button :hover {
-  background-color: rgb(196, 107, 34);;
+form button :hover {
+  background-color: rgb(196, 107, 34);
 }
