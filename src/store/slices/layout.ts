@@ -13,13 +13,13 @@ type NotificationType = {
 //We define a type for the slice state
 type LayoutState = {
   isSidebarOpen: boolean;
-  notification: NotificationType;
+  notification: NotificationType | null;
 };
 
 //Lets define the slice initial state
 const initialState: LayoutState = {
   isSidebarOpen: false,
-  notification: { title: '', message: '', status: 'success' },
+  notification: null,
 };
 
 export const LayoutSlice = createSlice({
@@ -29,7 +29,7 @@ export const LayoutSlice = createSlice({
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
-    setNotification: (state, action: PayloadAction<NotificationType>) => {
+    setNotification: (state, action: PayloadAction<NotificationType | null>) => {
       state.notification = action.payload;
     },
   },

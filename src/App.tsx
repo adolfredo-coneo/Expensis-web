@@ -1,22 +1,19 @@
-import { Route, Switch } from "react-router";
-import "./App.css";
-import Footer from "./components/Home/Footer";
-import Main from "./components/Home/Main";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import MainHeader from "./components/MainHeader/MainHeader";
+import { Route, Switch } from 'react-router';
+import './App.css';
+import Layout from './layout/Layout';
+import Main from './components/Home/Main';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
-    <>
-      <MainHeader />
+    <Layout>
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
       </Switch>
-      <Footer />
-    </>
+    </Layout>
   );
 }
 

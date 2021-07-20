@@ -1,9 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 import classes from './Login.module.css';
-import getFirebase from '../../firebase';
 import loginDataReducer from './LoginReducer';
 import { useAppDispatch } from '../../store/hooks';
-import { layoutActions } from '../../store/slices/layout';
+import { sendRegistration } from '../../store/actions/registration';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -53,37 +52,14 @@ const Login = () => {
 
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(
-      layoutActions.setNotification({
-        message: 'Logging in...',
-        status: 'info',
-        title: 'Processing',
-      })
-    );
     if (loginData.formIsValid) {
-      const firebaseInstance = getFirebase();
-      //firebase auth username password
-      try {
-        if (firebaseInstance) {
-          const user = await firebaseInstance
-            .auth()
-            .createUserWithEmailAndPassword(
-              loginData.email,
-              loginData.password
-            );
-          console.log('user', user);
-          dispatch(
-            layoutActions.setNotification({
-              message: 'User Created...',
-              status: 'success',
-              title: 'Complete',
-            })
-          );
-        }
-      } catch (error) {
-        console.log('error', error);
-        alert(error.message);
-      }
+      dispatch(
+        sendRegistration({
+          name: '',
+          email: loginData.email,
+          password: loginData.password,
+        })
+      );
     } else {
       console.log('Form not completed');
     }
