@@ -20,7 +20,6 @@ export const sendRegistration = (data: UserModel) => {
         const user = await firebaseInstance
           .auth()
           .createUserWithEmailAndPassword(data.email, data.password);
-        console.log('user', user);
         dispatch(
           layoutActions.setNotification({
             message: 'User Created...',
@@ -28,6 +27,7 @@ export const sendRegistration = (data: UserModel) => {
             title: 'Complete',
           })
         );
+        return user;
       }
     } catch (error) {
       dispatch(

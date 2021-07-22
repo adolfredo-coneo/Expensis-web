@@ -20,7 +20,6 @@ export const sendLogin = (data: Userlogin) => {
         const user = await firebaseInstance
           .auth()
           .signInWithEmailAndPassword(data.email, data.password);
-        console.log('user', user);
         dispatch(
           layoutActions.setNotification({
             message: 'User Logged In...',
@@ -28,6 +27,7 @@ export const sendLogin = (data: Userlogin) => {
             title: 'Complete',
           })
         );
+        return user;
       }
     } catch (error) {
       dispatch(

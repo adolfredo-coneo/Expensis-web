@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import registerDataReducer from './RegisterReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { sendRegistration } from '../../store/actions/registration';
@@ -6,7 +7,9 @@ import { layoutActions } from '../../store/slices/layout';
 import FormLayout from '../../layout/FormLayout';
 
 const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const [registerData, dispatchRegisterData] = useReducer(registerDataReducer, {
     name: '',
     nameIsValid: false,
@@ -50,29 +53,36 @@ const Login = () => {
 
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (formIsValid) {
-      dispatch(
-        sendRegistration({
-          name: registerData.name,
-          email: registerData.email,
-          password: registerData.password,
-        })
-      );
-    } else {
-      let message = '';
-      if (!nameIsValid && !passwordIsValid)
-        message = 'Name, Email or Password are not valid';
-      else if (!nameIsValid) message = 'Name is not valid';
-      else if (!emailIsValid) message = 'Email is not valid';
-      else if (!passwordIsValid) message = 'Password is not valid';
+    if (!isSubmitting) {
+      if (formIsValid) {
+        setIsSubmitting(true);
+        const response = await dispatch(
+          sendRegistration({
+            name: registerData.name,
+            email: registerData.email,
+            password: registerData.password,
+          })
+        );
+        setIsSubmitting(false);
+        if (response) {
+          history.push('/dashboard');
+        }
+      } else {
+        let message = '';
+        if (!nameIsValid && !passwordIsValid)
+          message = 'Name, Email or Password are not valid';
+        else if (!nameIsValid) message = 'Name is not valid';
+        else if (!emailIsValid) message = 'Email is not valid';
+        else if (!passwordIsValid) message = 'Password is not valid';
 
-      dispatch(
-        layoutActions.setNotification({
-          message,
-          status: 'error',
-          title: '',
-        })
-      );
+        dispatch(
+          layoutActions.setNotification({
+            message,
+            status: 'error',
+            title: '',
+          })
+        );
+      }
     }
   };
 
@@ -96,7 +106,9 @@ const Login = () => {
         />
       </div>
       <section>
-        <button type="submit">Register</button>
+        <button type="submit" className="btn-primary">
+          {isSubmitting ? 'Submitting...' : 'Submit'}
+        </button>
       </section>
     </FormLayout>
   );

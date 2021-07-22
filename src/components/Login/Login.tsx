@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import loginDataReducer from './LoginReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { sendLogin } from '../../store/actions/auth';
@@ -6,7 +7,9 @@ import { layoutActions } from '../../store/slices/layout';
 import FormLayout from '../../layout/FormLayout';
 
 const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const [loginData, dispatchLoginData] = useReducer(loginDataReducer, {
     email: '',
     emailIsValid: false,
@@ -40,27 +43,34 @@ const Login = () => {
 
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (formIsValid) {
-      dispatch(
-        sendLogin({
-          email: loginData.email,
-          password: loginData.password,
-        })
-      );
-    } else {
-      let message = '';
-      if (!emailIsValid && !passwordIsValid)
-        message = 'Email and password are not valid';
-      else if (!emailIsValid) message = 'Email is not valid';
-      else if (!passwordIsValid) message = 'Password is not valid';
+    if (!isSubmitting) {
+      if (formIsValid) {
+        setIsSubmitting(true);
+        const response = await dispatch(
+          sendLogin({
+            email: loginData.email,
+            password: loginData.password,
+          })
+        );
+        setIsSubmitting(false);
+        if (response) {
+          history.push('/dashboard');
+        }
+      } else {
+        let message = '';
+        if (!emailIsValid && !passwordIsValid)
+          message = 'Email and password are not valid';
+        else if (!emailIsValid) message = 'Email is not valid';
+        else if (!passwordIsValid) message = 'Password is not valid';
 
-      dispatch(
-        layoutActions.setNotification({
-          message,
-          status: 'error',
-          title: '',
-        })
-      );
+        dispatch(
+          layoutActions.setNotification({
+            message,
+            status: 'error',
+            title: '',
+          })
+        );
+      }
     }
   };
 
@@ -80,7 +90,9 @@ const Login = () => {
         />
       </div>
       <div>
-        <button type="submit">Login</button>
+        <button type="submit">
+          {isSubmitting ? 'Submitting...' : 'Login'}
+        </button>
       </div>
     </FormLayout>
   );
