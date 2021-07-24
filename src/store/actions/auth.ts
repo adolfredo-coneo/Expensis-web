@@ -10,7 +10,6 @@ export const sendLogin = (data: Userlogin) => {
       layoutActions.setNotification({
         message: 'Logging in...',
         status: 'info',
-        title: '',
       })
     );
 
@@ -32,7 +31,6 @@ export const sendLogin = (data: Userlogin) => {
             layoutActions.setNotification({
               message: 'User Logged In...',
               status: 'success',
-              title: 'Complete',
             })
           );
         }
@@ -44,7 +42,6 @@ export const sendLogin = (data: Userlogin) => {
         layoutActions.setNotification({
           message: error.message,
           status: 'error',
-          title: '',
         })
       );
     }
@@ -75,7 +72,6 @@ export const getCurrentUser = () => {
         layoutActions.setNotification({
           message: error.message,
           status: 'error',
-          title: '',
         })
       );
     }
@@ -89,7 +85,6 @@ export const signOutUser = () => {
       layoutActions.setNotification({
         message: 'Signing Out...',
         status: 'info',
-        title: '',
       })
     );
     const firebaseInstance = getFirebase();
@@ -101,7 +96,6 @@ export const signOutUser = () => {
       layoutActions.setNotification({
         message: 'Sign Out Complete',
         status: 'success',
-        title: '',
       })
     );
   };

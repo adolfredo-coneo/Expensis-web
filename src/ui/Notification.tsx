@@ -31,7 +31,6 @@ const Notification: React.FC = () => {
     <div className={classes.notification}>
       {notification && (
         <section className={specialClasses}>
-          <h2>{notification.title}</h2>
           <p>{notification.message}</p>
         </section>
       )}

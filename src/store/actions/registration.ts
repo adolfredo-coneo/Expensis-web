@@ -9,7 +9,6 @@ export const sendRegistration = (data: UserModel) => {
       layoutActions.setNotification({
         message: 'Creating User...',
         status: 'info',
-        title: '',
       })
     );
 
@@ -24,7 +23,6 @@ export const sendRegistration = (data: UserModel) => {
           layoutActions.setNotification({
             message: 'User Created...',
             status: 'success',
-            title: 'Complete',
           })
         );
         return user;
@@ -34,7 +32,6 @@ export const sendRegistration = (data: UserModel) => {
         layoutActions.setNotification({
           message: error.message,
           status: 'error',
-          title: '',
         })
       );
     }

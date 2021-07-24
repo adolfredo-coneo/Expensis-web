@@ -7,7 +7,6 @@ type NotificationStatus = 'success' | 'info' | 'warning' | 'error';
 type NotificationType = {
   message: string;
   status: NotificationStatus;
-  title: string;
 };
 
 //We define a type for the slice state
@@ -29,7 +28,10 @@ export const LayoutSlice = createSlice({
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
-    setNotification: (state, action: PayloadAction<NotificationType | null>) => {
+    setNotification: (
+      state,
+      action: PayloadAction<NotificationType | null>
+    ) => {
       state.notification = action.payload;
     },
   },

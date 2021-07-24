@@ -79,7 +79,6 @@ const Login = () => {
           layoutActions.setNotification({
             message,
             status: 'error',
-            title: '',
           })
         );
       }
