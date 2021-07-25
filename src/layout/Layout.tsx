@@ -1,7 +1,7 @@
 import React from 'react';
 import MainHeader from '../components/MainHeader/MainHeader';
 import Footer from '../components/Home/Footer';
-import Notification from '../ui/Notification';
+import Notification from '../components/UI/Notification/Notification';
 
 const Layout: React.FC = ({ children }) => {
   return (

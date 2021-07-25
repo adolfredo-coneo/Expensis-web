@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import loginDataReducer from './LoginReducer';
+import Input from '../UI/Input/Input';
+import SubmitButton from '../UI/SubmitButton/SubmitButton';
 import { useAppDispatch } from '../../store/hooks';
 import { sendLogin } from '../../store/actions/auth';
 import { layoutActions } from '../../store/slices/layout';
@@ -75,24 +78,24 @@ const Login = () => {
 
   return (
     <FormLayout title="Access Your Account" submitHandler={formSubmitHandler}>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" required onChange={emailChangeHandler} />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          required
-          onChange={passwordChangeHandler}
-        />
-      </div>
-      <div>
-        <button type="submit">
-          {isSubmitting ? 'Submitting...' : 'Login'}
-        </button>
-      </div>
+      <Input
+        id="email"
+        label="Email"
+        type="email"
+        onChange={emailChangeHandler}
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        onChange={passwordChangeHandler}
+      />
+      <SubmitButton
+        type="submit"
+        label="Login"
+        isSubmitting={isSubmitting}
+        submittingLabel="Submitting..."
+      />
     </FormLayout>
   );
 };

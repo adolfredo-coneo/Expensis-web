@@ -1,5 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import Input from '../UI/Input/Input';
+import SubmitButton from '../UI/SubmitButton/SubmitButton';
 import registerDataReducer from './RegisterReducer';
 import { useAppDispatch } from '../../store/hooks';
 import { sendRegistration } from '../../store/actions/registration';
@@ -87,28 +90,25 @@ const Login = () => {
 
   return (
     <FormLayout title="Create Your Account" submitHandler={formSubmitHandler}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" required onChange={nameChangeHandler} />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" required onChange={emailChangeHandler} />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          required
-          onChange={passwordChangeHandler}
-        />
-      </div>
-      <section>
-        <button type="submit" className="btn-primary">
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
-      </section>
+      <Input id="name" type="text" label="Name" onChange={nameChangeHandler} />
+      <Input
+        id="email"
+        type="email"
+        label="Email"
+        onChange={emailChangeHandler}
+      />
+      <Input
+        id="password"
+        type="password"
+        label="Password"
+        onChange={passwordChangeHandler}
+      />
+      <SubmitButton
+        label="Create Account"
+        type="submit"
+        isSubmitting={isSubmitting}
+        submittingLabel="Registering..."
+      />
     </FormLayout>
   );
 };

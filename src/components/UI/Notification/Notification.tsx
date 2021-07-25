@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classes from './Notification.module.css';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { layoutActions } from '../store/slices/layout';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { layoutActions } from '../../../store/slices/layout';
 
 const Notification: React.FC = () => {
   const dispatch = useAppDispatch();
