@@ -90,7 +90,13 @@ const Login = () => {
 
   return (
     <FormLayout title="Create Your Account" submitHandler={formSubmitHandler}>
-      <Input id="name" type="text" label="Name" onChange={nameChangeHandler} />
+      <Input
+        id="name"
+        type="text"
+        label="Name"
+        onChange={nameChangeHandler}
+        setFocus={true}
+      />
       <Input
         id="email"
         type="email"

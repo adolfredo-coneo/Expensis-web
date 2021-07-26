@@ -83,6 +83,7 @@ const Login = () => {
         label="Email"
         type="email"
         onChange={emailChangeHandler}
+        setFocus={true}
       />
       <Input
         id="password"
