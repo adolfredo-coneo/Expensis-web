@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './Input.module.css';
 
@@ -13,9 +13,11 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({ id, type, label, onChange, setFocus = false }) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  if(ref.current !== null && setFocus) {
-    ref.current.focus();
-  }
+  useEffect(() => {
+    if(ref.current !== null && setFocus) {
+      ref.current.focus();
+    }
+  },[setFocus])
 
   return (
     <div className={classes.control}>

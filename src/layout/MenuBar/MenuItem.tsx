@@ -8,7 +8,7 @@ interface MenuItemProps {
 const MenuItem: React.FC<MenuItemProps> = ({ label, icon }) => {
   return (
     <li>
-      <a href="#">
+      <a href="/home">
         <i className={icon}></i>
         <span className="links_name">{label}</span>
       </a>

@@ -1,26 +1,11 @@
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './Navigation.module.css';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { signOutUser } from '../../store/actions/auth';
+import { useAppSelector } from '../../store/hooks';
 
 interface Props {}
 
 const Navigation = (props: Props) => {
-  const dispatch = useAppDispatch();
-  const history = useHistory();
   const user = useAppSelector((state) => state.auth);
-
-  const handleLogout = async (Event: React.MouseEvent<HTMLAnchorElement>) => {
-    Event.preventDefault();
-    try {
-      await dispatch(signOutUser());
-
-      //console.log({ response, data });
-      history.push('/');
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   return (
     <nav className={classes.nav}>
@@ -29,7 +14,7 @@ const Navigation = (props: Props) => {
           <>
             <li>
               <NavLink
-                to="/register"
+                to="/home/register"
                 className={classes.link}
                 activeClassName={classes.active}
               >
@@ -38,7 +23,7 @@ const Navigation = (props: Props) => {
             </li>
             <li>
               <NavLink
-                to="/login"
+                to="/home/login"
                 className={classes.link}
                 activeClassName={classes.active}
               >
@@ -51,12 +36,11 @@ const Navigation = (props: Props) => {
           <>
             <li>
               <NavLink
-                to="/"
+                to="/dashboard"
                 className={classes.link}
                 activeClassName={classes.active}
-                onClick={(Event) => handleLogout(Event)}
               >
-                Logout
+                Dashboard
               </NavLink>
             </li>
           </>

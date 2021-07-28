@@ -6,7 +6,7 @@ const MainHeader = () => {
   return (
     <div className={classes["main-header"]}>
       <h1>
-        <Link to="/">eXpensis</Link>
+        <Link to="/home">eXpensis</Link>
       </h1>
       <Navigation />
     </div>
