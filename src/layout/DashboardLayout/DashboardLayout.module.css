@@ -3,5 +3,8 @@
   height: 100%;
   width: calc(100% - 240px);
   left: 240px;
-  margin-top: 2.5rem;
+  font-size: 25px;
+  font-weight: 500;
+  color: #1d1b31;
+  margin: 12px;
 }
