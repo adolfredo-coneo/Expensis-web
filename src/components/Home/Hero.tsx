@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import classes from "./Hero.module.css";
+import { Link } from 'react-router-dom';
+import classes from './Hero.module.css';
 
 interface Props {}
 

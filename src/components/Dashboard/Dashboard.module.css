@@ -1,7 +1,0 @@
-.main__content {
-  position: absolute;
-  height: 100%;
-  width: calc(100% - 240px);
-  left: 240px;
-  margin-top: 2.5rem;
-}

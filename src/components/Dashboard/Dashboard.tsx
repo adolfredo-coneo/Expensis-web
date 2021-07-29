@@ -1,18 +1,16 @@
 import React from 'react';
 
-import MenuBar from '../../layout/MenuBar/MenuBar';
-import classes from './Dashboard.module.css';
-import { useAppSelector } from '../../store/hooks';
+import DashboardLayout from '../../layout/DashboardLayout/DashboardLayout';
+import DashMain from './DashMain';
+import Finances from '../Finances/Finances';
+import PrivateRoute from './PrivateRoute';
 
-interface Props {}
-
-const Dashboard: React.FC<Props> = (props) => {
-  const user = useAppSelector((state) => state.auth);
+const Dashboard: React.FC = () => {
   return (
-    <>
-      {user.email && <MenuBar />}
-      <div className={classes.main__content}>Dashboard</div>
-    </>
+    <DashboardLayout>
+      <PrivateRoute path="/dashboard" exact component={DashMain} />
+      <PrivateRoute path="/dashboard/finances" exact component={Finances} />
+    </DashboardLayout>
   );
 };
 

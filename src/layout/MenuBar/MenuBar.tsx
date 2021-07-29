@@ -14,25 +14,25 @@ const menus = [
     id: 'dashboard',
     label: 'Dashboard',
     icon: 'bx bx-grid-alt',
-    route: 'dashboard',
+    route: '/dashboard',
   },
   {
     id: 'finances',
     label: 'Finances',
     icon: 'bx bx-money',
-    route: 'finances',
+    route: '/dashboard/finances',
   },
   {
     id: 'analytics',
     label: 'Analytics',
     icon: 'bx bx-pie-chart-alt-2',
-    route: 'analytics',
+    route: '/dashboard/analytics',
   },
   {
     id: 'settings',
     label: 'Settings',
     icon: 'bx bx-cog',
-    route: 'settings',
+    route: '/dashboard/settings',
   },
 ];
 
@@ -65,9 +65,9 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
           <input type="text" placeholder="Search..." />
           {/*<span className="tooltip">Dashboard</span>*/}
         </li>
-        {menus.map((menu) => {
-          return <MenuItem key={menu.id} label={menu.label} icon={menu.icon} />;
-        })}
+        {menus.map(({ id, label, icon, route }) => (
+          <MenuItem key={id} label={label} icon={icon} route={route} />
+        ))}
       </ul>
       <div className={classes.profile__content}>
         <div className={classes.profile}>

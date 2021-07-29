@@ -17,6 +17,8 @@
 
 .info {
   padding: 2em;
+  display: flex;
+  flex-direction: column;
 }
 
 .info h1 {
@@ -24,7 +26,8 @@
 }
 
 .info p {
-  font-size: 1.5em;
+  font-size: 1.3em;
+  margin-bottom: 10px;
 }
 
 .info a {
@@ -32,6 +35,8 @@
   background-color: rgb(63, 112, 80);
   padding: 1rem;
   color: white;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border-radius: 4px;
+  width: 200px;
+  text-align: center;
 }

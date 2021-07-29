@@ -1,8 +1,8 @@
 import React from 'react';
-import MainHeader from '../components/MainHeader/MainHeader';
+import MainHeader from '../../components/MainHeader/MainHeader';
 
-import Footer from '../components/Home/Footer';
-import Notification from '../components/UI/Notification/Notification';
+import Footer from '../../components/Home/Footer';
+import Notification from '../../components/UI/Notification/Notification';
 import classes from './Layout.module.css';
 
 const Layout: React.FC = ({ children }) => {
