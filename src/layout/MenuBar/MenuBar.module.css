@@ -3,9 +3,14 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 240px;
+  width: 78px;
   background: #11101d;
   padding: 6px 14px;
+  transition: all 0.5s ease;
+}
+
+.sidebar__active {
+  width: 240px;
 }
 
 .sidebar .logo_content .logo {
@@ -14,6 +19,12 @@
   height: 50px;
   width: 100%;
   align-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar.sidebar__active .logo_content .logo {
+  opacity: 1;
+  pointer-events: none;
 }
 
 .logo_content .logo i {
@@ -29,7 +40,7 @@
 .btn {
   position: absolute;
   color: #fff;
-  left: 90%;
+  left: 50%;
   top: 6px;
   font-size: 20px;
   height: 50px;
@@ -37,6 +48,11 @@
   text-align: center;
   line-height: 50px;
   transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.sidebar.sidebar__active .btn {
+  left: 90%;
 }
 
 .sidebar ul {
@@ -72,6 +88,13 @@
   z-index: 99;
   color: #fff;
   font-size: 22px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.bx__search:hover {
+  background: #fff;
+  color: #1d1b31;
 }
 
 .sidebar ul li a {
@@ -81,6 +104,7 @@
   text-decoration: none;
   transition: all 0.4s ease;
   border-radius: 12px;
+  white-space: nowrap;
 }
 
 .sidebar ul li a:hover {
@@ -114,6 +138,14 @@
 .profile__details {
   display: flex;
   align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.sidebar.sidebar__active .profile__details {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .profile__details img {
@@ -138,11 +170,55 @@
 
 .logout {
   position: absolute;
-  left: 88%;
   bottom: 5px;
+  left: 50%;
   transform: translateX(-50%);
   min-width: 50px;
   line-height: 50px;
   font-size: 20px;
   border-radius: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.sidebar.sidebar__active .logout {
+  left: 88%;
+}
+
+.tooltip {
+  position: absolute;
+  left: 122px;
+  top: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  height: 35px;
+  width: 122px;
+  background-color: #fff;
+  line-height: 35px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: 0s;
+  opacity: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.sidebar.sidebar__active .tooltip {
+  display: none;
+}
+
+.links__name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar.sidebar__active .links__name {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menuItem:hover .tooltip {
+  transition: all 0.5s ease;
+  opacity: 1;
+  top: 50%;
 }

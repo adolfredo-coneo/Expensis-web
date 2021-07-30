@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import classes from './MenuBar.module.css';
 import MenuItem from './MenuItem';
@@ -39,6 +39,7 @@ const menus = [
 const MenuBar: React.FC<MenuBarProps> = (props) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async (Event: React.MouseEvent<HTMLAnchorElement>) => {
     Event.preventDefault();
@@ -50,20 +51,28 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
     }
   };
 
+  const onClickMenuHandler = () => {
+    if (sidebarRef.current)
+      sidebarRef.current.classList.toggle(classes.sidebar__active);
+  };
+
   return (
-    <div className={classes.sidebar}>
+    <div className={classes.sidebar} ref={sidebarRef}>
       <div className={classes.logo_content}>
         <div className={classes.logo}>
           <i className="bx bxl-c-plus-plus"></i>
           <div className={classes.logo_name}>eXpensis</div>
         </div>
-        <i className={`bx bx-menu btn ${classes.btn}`} id="btn"></i>
+        <i
+          className={`bx bx-menu btn ${classes.btn}`}
+          onClick={onClickMenuHandler}
+          id="btn"
+        ></i>
       </div>
       <ul className="nav_list">
         <li>
-          <i className={`bx bx-search ${classes.bx__search}`}></i>
+          <i className={`bx bx-search ${classes.bx__search}`} onClick={onClickMenuHandler}></i>
           <input type="text" placeholder="Search..." />
-          {/*<span className="tooltip">Dashboard</span>*/}
         </li>
         {menus.map(({ id, label, icon, route }) => (
           <MenuItem key={id} label={label} icon={icon} route={route} />
