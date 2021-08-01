@@ -1,10 +1,16 @@
 .main__content {
   position: absolute;
   height: 100%;
-  width: calc(100% - 240px);
-  left: 240px;
   font-size: 25px;
   font-weight: 500;
   color: #1d1b31;
   padding: 12px;
+  width: calc(100% - 78px);
+  left: 78px;
+  transition: all 0.5s ease;
+}
+
+.main__content__sidebar__active {
+  width: calc(100% - 240px);
+  left: 240px;
 }

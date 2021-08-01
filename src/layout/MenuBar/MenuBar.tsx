@@ -1,11 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './MenuBar.module.css';
 import MenuItem from './MenuItem';
 import profile from '../../resources/images/profile.png';
 import { Link, useHistory } from 'react-router-dom';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOutUser } from '../../store/actions/auth';
+import { layoutActions } from '../../store/slices/layout';
 
 interface MenuBarProps {}
 
@@ -40,6 +41,8 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const userState = useAppSelector((state) => state.auth);
+  const sideBarState = useAppSelector((state) => state.layout.isSidebarOpen);
 
   const handleLogout = async (Event: React.MouseEvent<HTMLAnchorElement>) => {
     Event.preventDefault();
@@ -51,9 +54,16 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (sidebarRef.current) {
+      if (sideBarState)
+        sidebarRef.current.classList.add(classes.sidebar__active);
+      else sidebarRef.current.classList.remove(classes.sidebar__active);
+    }
+  }, [sideBarState]);
+
   const onClickMenuHandler = () => {
-    if (sidebarRef.current)
-      sidebarRef.current.classList.toggle(classes.sidebar__active);
+    dispatch(layoutActions.toggleSidebar());
   };
 
   return (
@@ -71,7 +81,10 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
       </div>
       <ul className="nav_list">
         <li>
-          <i className={`bx bx-search ${classes.bx__search}`} onClick={onClickMenuHandler}></i>
+          <i
+            className={`bx bx-search ${classes.bx__search}`}
+            onClick={onClickMenuHandler}
+          ></i>
           <input type="text" placeholder="Search..." />
         </li>
         {menus.map(({ id, label, icon, route }) => (
@@ -84,7 +97,7 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
             <img src={profile} alt="profile" />
             <div className={classes.name__job}>
               <div className={classes.name}>Adol Coneo</div>
-              <div className={classes.job}>Software Developer</div>
+              <div className={classes.job}>{userState.email}</div>
             </div>
           </div>
           <Link
