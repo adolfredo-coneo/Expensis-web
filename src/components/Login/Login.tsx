@@ -89,6 +89,7 @@ const Login = () => {
         id="password"
         label="Password"
         type="password"
+        role="password"
         onChange={passwordChangeHandler}
       />
       <SubmitButton
