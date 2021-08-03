@@ -4,7 +4,7 @@
   left: 0;
   height: 100%;
   width: 78px;
-  background: #11101d;
+  background: rgb(63, 112, 80);
   padding: 6px 14px;
   transition: all 0.5s ease;
 }
@@ -78,7 +78,7 @@
   border-radius: 12px;
   outline: none;
   border: none;
-  background: #1d1b31;
+  background: rgb(29, 53, 38);
   padding-left: 50px;
   font-size: 18px;
   color: #fff;
@@ -95,7 +95,7 @@
 
 .bx__search:hover {
   background: #fff;
-  color: #1d1b31;
+  color: rgb(29, 53, 38);
 }
 
 .sidebar ul li a {
@@ -139,7 +139,7 @@
 }
 
 .sidebar.sidebar__active .profile {
-  background: #1d1b31;
+  background: rgb(29, 53, 38);
 }
 
 .profile__details {
@@ -188,7 +188,7 @@
   text-align: center;
   color: #fff;
   transition: all 0.4s ease;
-  background: #1d1b31;
+  background: rgb(29, 53, 38);
 }
 
 .sidebar.sidebar__active .logout {
