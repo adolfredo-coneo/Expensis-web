@@ -1,6 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import getFirebase from '../../firebase';
 import { UserModel } from '../../models/User';
+import { authActions } from '../slices/auth';
 import { layoutActions } from '../slices/layout';
 
 export const sendRegistration = (data: UserModel) => {
@@ -19,6 +20,21 @@ export const sendRegistration = (data: UserModel) => {
         const user = await firebaseInstance
           .auth()
           .createUserWithEmailAndPassword(data.email, data.password);
+        if (user) {
+          var currentUser = firebaseInstance.auth().currentUser;
+          if (currentUser) {
+            await currentUser.updateProfile({
+              displayName: data.name,
+            });
+            dispatch(
+              authActions.authUser({
+                email: currentUser.email,
+                name: currentUser.displayName,
+              })
+            );
+          }
+        }
+
         dispatch(
           layoutActions.setNotification({
             message: 'User Created...',

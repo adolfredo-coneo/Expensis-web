@@ -89,8 +89,8 @@ export const signOutUser = () => {
     );
     const firebaseInstance = getFirebase();
     if (firebaseInstance) {
-      await firebaseInstance.auth().signOut();
       dispatch(authActions.signOutUser());
+      await firebaseInstance.auth().signOut();
     }
     dispatch(
       layoutActions.setNotification({

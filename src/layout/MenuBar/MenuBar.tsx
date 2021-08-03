@@ -96,7 +96,7 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
           <div className={classes.profile__details}>
             <img src={profile} alt="profile" />
             <div className={classes.name__job}>
-              <div className={classes.name}>Adol Coneo</div>
+              <div className={classes.name}>{userState.name}</div>
               <div className={classes.job}>{userState.email}</div>
             </div>
           </div>

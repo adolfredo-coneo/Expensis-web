@@ -20,9 +20,7 @@ function App() {
       dispatch(getCurrentUser());
       return;
     }
-    console.log(user.email);
-    // eslint-disable-next-line
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
     <BrowserRouter>
