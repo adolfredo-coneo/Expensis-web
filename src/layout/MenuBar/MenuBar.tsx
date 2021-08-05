@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import classes from './MenuBar.module.css';
 import MenuItem from './MenuItem';
@@ -7,35 +7,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOutUser } from '../../store/actions/auth';
 import { layoutActions } from '../../store/slices/layout';
+import { getMenus } from '../../store/actions/menus';
+import { Menu } from '../../models/Menu';
 
 interface MenuBarProps {}
-
-const menus = [
-  {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: 'bx bx-grid-alt',
-    route: '/dashboard',
-  },
-  {
-    id: 'finances',
-    label: 'Finances',
-    icon: 'bx bx-money',
-    route: '/dashboard/finances',
-  },
-  {
-    id: 'analytics',
-    label: 'Analytics',
-    icon: 'bx bx-pie-chart-alt-2',
-    route: '/dashboard/analytics',
-  },
-  {
-    id: 'settings',
-    label: 'Settings',
-    icon: 'bx bx-cog',
-    route: '/dashboard/settings',
-  },
-];
 
 const MenuBar: React.FC<MenuBarProps> = (props) => {
   const history = useHistory();
@@ -43,6 +18,15 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const userState = useAppSelector((state) => state.auth);
   const sideBarState = useAppSelector((state) => state.layout.isSidebarOpen);
+  const [menus, setMenus] = useState<Menu[] | undefined>([]);
+
+  useEffect(() => {
+    const getFireMenus = async () => {
+      const menusFirestore = await dispatch(getMenus());
+      setMenus(menusFirestore);
+    };
+    getFireMenus();
+  }, [dispatch]);
 
   const handleLogout = async (Event: React.MouseEvent<HTMLAnchorElement>) => {
     Event.preventDefault();
@@ -87,9 +71,10 @@ const MenuBar: React.FC<MenuBarProps> = (props) => {
           ></i>
           <input type="text" placeholder="Search..." />
         </li>
-        {menus.map(({ id, label, icon, route }) => (
-          <MenuItem key={id} label={label} icon={icon} route={route} />
-        ))}
+        {menus &&
+          menus.map(({ code, label, icon, route }) => (
+            <MenuItem key={code} label={label} icon={icon} route={route} />
+          ))}
       </ul>
       <div className={classes.profile__content}>
         <div className={classes.profile}>
