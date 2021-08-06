@@ -9,7 +9,7 @@ export const getMenus = () => {
       if (!firebaseInstance) return;
 
       const db = firebaseInstance.firestore();
-      const ref = db.collection('menus');
+      const ref = db.collection('menus').orderBy('order', 'asc');
 
       const menus = await ref.get();
       let allMenus: Menu[] = [];
