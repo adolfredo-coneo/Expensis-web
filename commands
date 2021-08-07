@@ -22,3 +22,6 @@ TypeScript: Restart TS server
 //React Redux
 yarn add react-redux
 yarn add @reduxjs/toolkit
+
+//Storybook
+npx sb init
