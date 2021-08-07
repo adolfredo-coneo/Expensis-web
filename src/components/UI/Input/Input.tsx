@@ -4,16 +4,18 @@ import classes from './Input.module.css';
 
 interface InputProps {
   id: string;
-  type: string;
   label: string;
+  variant?: string;
+  type?: string;
   role?: string;
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   setFocus?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
+  variant = 'small',
   id,
-  type,
+  type = 'text',
   label,
   role,
   onChange,
@@ -28,7 +30,7 @@ const Input: React.FC<InputProps> = ({
   }, [setFocus]);
 
   return (
-    <div className={classes.control}>
+    <div className={`${classes.control} ${classes[variant]}`}>
       <label htmlFor={id}>{label}</label>
       <input
         ref={ref}

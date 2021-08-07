@@ -25,3 +25,12 @@ yarn add @reduxjs/toolkit
 
 //Storybook
 npx sb init
+
+//fix babel loader error
+delete yarn.lock
+delete node_modules
+yarn
+"resolutions": {
+    "babel-loader": "8.1.0"
+  }
+  yarn install

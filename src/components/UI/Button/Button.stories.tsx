@@ -1,17 +1,43 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Button from './Button';
+import Center from '../Center/Center';
 
 export default {
-  title: 'Button',
+  title: 'form/Button',
   component: Button,
-} as ComponentMeta<typeof Button>;;
+  argTypes: {
+    onClick: { action: 'clicked' },
+  },
+} as ComponentMeta<typeof Button>;
 
-export const Primary = () => <Button variant="primary">Primary</Button>;
+const Template: ComponentStory<typeof Button> = (args) => (
+  <Center>
+    <Button {...args} />
+  </Center>
+);
 
-export const Secondary = () => <Button variant="secondary">Secondary</Button>;
+export const Primary = Template.bind({});
+Primary.args = {
+  variant: 'primary',
+  children: 'Primary',
+};
 
-export const Success = () => <Button variant="success">Success</Button>;
+export const Secondary = Template.bind({});
+Secondary.args = {
+  variant: 'secondary',
+  children: 'Secondary',
+};
 
-export const Danger = () => <Button variant="danger">Danger</Button>;
+export const Success = Template.bind({});
+Success.args = {
+  variant: 'success',
+  children: 'Success',
+};
+
+export const Danger = Template.bind({});
+Danger.args = {
+  variant: 'danger',
+  children: 'Danger',
+};

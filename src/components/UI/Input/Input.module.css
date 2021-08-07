@@ -14,3 +14,18 @@
   padding: 0.25rem;
   border: 1px solid #ccc;
 }
+
+.small input {
+  height: 2rem;
+  font-size: 0.875rem;
+}
+
+.medium input {
+  height: 2.5rem;
+  font-size: 1rem;
+}
+
+.large input {
+  height: 3rem;
+  font-size: 1.25rem;
+}
