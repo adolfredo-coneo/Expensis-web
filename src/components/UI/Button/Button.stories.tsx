@@ -20,24 +20,24 @@ const Template: ComponentStory<typeof Button> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  variant: 'primary',
+  color: 'primary',
   children: 'Primary',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  variant: 'secondary',
+  color: 'secondary',
   children: 'Secondary',
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  variant: 'success',
+  color: 'success',
   children: 'Success',
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  variant: 'danger',
+  color: 'danger',
   children: 'Danger',
 };

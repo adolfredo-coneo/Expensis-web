@@ -9,6 +9,6 @@ export default {
 export const PrimarySubscription = () => (
   <div>
     <Large variant="small" id="small" label="Small" />
-    <Primary variant="primary">Button</Primary>
+    <Primary color="primary">Button</Primary>
   </div>
 );

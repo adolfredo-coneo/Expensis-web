@@ -34,3 +34,7 @@ yarn
     "babel-loader": "8.1.0"
   }
   yarn install
+
+//Material UI
+yarn add @material-ui/core
+yarn add -D storybook-addon-material-ui
