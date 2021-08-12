@@ -14,8 +14,37 @@ const Template: ComponentStory<typeof DashContent> = (args) => (
   </div>
 );
 
-export const Green = Template.bind({});
-Green.args = {
+export const Solid = Template.bind({});
+Solid.args = {
   title: 'Regular',
+  variant: 'solid',
+  children: 'This is the regular',
+};
+
+export const Dotted = Template.bind({});
+Dotted.args = {
+  title: 'Regular',
+  variant: 'dotted',
+  children: 'This is the regular',
+};
+
+export const Dashed = Template.bind({});
+Dashed.args = {
+  title: 'Regular',
+  variant: 'dashed',
+  children: 'This is the regular',
+};
+
+export const Double = Template.bind({});
+Double.args = {
+  title: 'Regular',
+  variant: 'double',
+  children: 'This is the regular',
+};
+
+export const None = Template.bind({});
+None.args = {
+  title: 'Regular',
+  variant: 'none',
   children: 'This is the regular',
 };

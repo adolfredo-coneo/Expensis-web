@@ -1,31 +1,45 @@
 import React from 'react';
 import {
-  Box,
   Breadcrumbs,
   Typography,
   Link,
   Container,
   makeStyles,
   createStyles,
+  Box,
 } from '@material-ui/core';
+import { BorderStyle } from '../../types/ui';
+
+interface StyleProps {
+  borderStyle: BorderStyle;
+}
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    content: {
+    content: (props: StyleProps) => ({
       padding: theme.spacing(1),
       width: '100%',
-      height: '90%',
+      height: '95%',
       backgroundColor: theme.palette.background.default,
-    },
+      borderColor: theme.palette.primary.main,
+      borderRadius: 4,
+      border: '3px',
+      borderStyle: props.borderStyle,
+    }),
   })
 );
 
 interface DashContentProps {
   title: string;
+  variant?: BorderStyle;
 }
 
-const DashContent: React.FC<DashContentProps> = ({ title, children }) => {
-  const classes = useStyles();
+const DashContent: React.FC<DashContentProps> = ({
+  title,
+  variant = 'solid',
+  children,
+}) => {
+  const classes = useStyles({ borderStyle: variant });
 
   return (
     <Box m={1} height="90%" width="98%">
@@ -38,8 +52,8 @@ const DashContent: React.FC<DashContentProps> = ({ title, children }) => {
         </Link>
         <Typography color="textPrimary">{title}</Typography>
       </Breadcrumbs>
-      <Box border={2} borderRadius={4} borderColor="#3f7050" height="95%">
-        <Container maxWidth={false} className={classes.content}>
+      <Box border={2} className={classes.content}>
+        <Container maxWidth={false}>
           <Box m={2}>{children}</Box>
         </Container>
       </Box>
