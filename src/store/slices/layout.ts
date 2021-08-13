@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Menu } from '../../models/Menu';
 
 //we define the notification Status
 type NotificationStatus = 'success' | 'info' | 'warning' | 'error';
@@ -13,12 +14,16 @@ type NotificationType = {
 type LayoutState = {
   isSidebarOpen: boolean;
   notification: NotificationType | null;
+  loadingDashboard: number;
+  menus: Menu[];
 };
 
 //Lets define the slice initial state
 const initialState: LayoutState = {
   isSidebarOpen: false,
   notification: null,
+  loadingDashboard: 0,
+  menus: [],
 };
 
 export const LayoutSlice = createSlice({
@@ -33,6 +38,12 @@ export const LayoutSlice = createSlice({
       action: PayloadAction<NotificationType | null>
     ) => {
       state.notification = action.payload;
+    },
+    setLoadingDashboard: (state, action: PayloadAction<number>) => {
+      state.loadingDashboard = action.payload;
+    },
+    setMenu: (state, action: PayloadAction<Menu[]>) => {
+      state.menus = action.payload;
     },
   },
 });

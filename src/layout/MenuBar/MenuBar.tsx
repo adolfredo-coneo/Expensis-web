@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './MenuBar.module.css';
 import MenuItem from './MenuItem';
@@ -7,26 +7,16 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOutUser } from '../../store/actions/auth';
 import { layoutActions } from '../../store/slices/layout';
-import { getMenus } from '../../store/actions/menus';
-import { Menu } from '../../models/Menu';
 
 interface MenuBarProps {}
 
 const MenuBar: React.FC<MenuBarProps> = (props) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const menus = useAppSelector((state) => state.layout.menus);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const userState = useAppSelector((state) => state.auth);
   const sideBarState = useAppSelector((state) => state.layout.isSidebarOpen);
-  const [menus, setMenus] = useState<Menu[] | undefined>([]);
-
-  useEffect(() => {
-    const getFireMenus = async () => {
-      const menusFirestore = await dispatch(getMenus());
-      setMenus(menusFirestore);
-    };
-    getFireMenus();
-  }, [dispatch]);
 
   const handleLogout = async (Event: React.MouseEvent<HTMLAnchorElement>) => {
     Event.preventDefault();
