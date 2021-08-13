@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import DashboardLayout from '../../layout/DashboardLayout/DashboardLayout';
-import ProgressBar from '../../components/UI/ProgressBar/ProgressBar';
+import LoadingLayout from '../../layout/LoadingLayout/LoadingLayout';
 import DashMain from './DashMain';
 import Finances from '../Finances/Finances';
 import PrivateRoute from './PrivateRoute';
@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
   return (
     <>
       {loadPercentage < 100 && (
-        <ProgressBar variant="determinate" value={loadPercentage} />
+        <LoadingLayout variant="determinate" value={loadPercentage} />
       )}
       {loadPercentage === 100 && (
         <DashboardLayout>
