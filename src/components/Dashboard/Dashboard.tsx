@@ -3,8 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import DashboardLayout from '../../layout/DashboardLayout/DashboardLayout';
 import LoadingLayout from '../../layout/LoadingLayout/LoadingLayout';
-import DashMain from './DashMain';
-import Finances from '../Finances/Finances';
+import DashMain from '../../views/DashMain/DashMain';
+import Finances from '../../views/Finances/Finances';
+import Accounts from '../../views/Accounts/Accounts';
+import Obligations from '../../views/Obligations/Obligations';
+import CreateEditAccount from '../../views/CreateEditAccount/CreateEditAccount';
 import PrivateRoute from './PrivateRoute';
 import { loadSystem } from '../../store/actions/system';
 
@@ -32,6 +35,9 @@ const Dashboard: React.FC = () => {
         <DashboardLayout>
           <PrivateRoute path="/dashboard" exact component={DashMain} />
           <PrivateRoute path="/dashboard/finances" exact component={Finances} />
+          <PrivateRoute path="/dashboard/accounts" exact component={Accounts} />
+          <PrivateRoute path="/dashboard/obligations" exact component={Obligations} />
+          <PrivateRoute path="/dashboard/create-edit-account" exact component={CreateEditAccount} routeProps={{title: 'Create/Edit Account'}} />
         </DashboardLayout>
       )}
     </>

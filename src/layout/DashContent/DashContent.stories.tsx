@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import Button from '../../components/UI/Button/Button';
 
 import DashContent from './DashContent';
 
@@ -47,4 +48,16 @@ None.args = {
   title: 'Regular',
   variant: 'none',
   children: 'This is the regular',
+};
+
+export const WithTrailing = Template.bind({});
+WithTrailing.args = {
+  title: 'Trailing Button',
+  variant: 'solid',
+  children: 'This is the Trailing Button',
+  trailing: (
+    <Button color="primary" size="small">
+      Trailing Button
+    </Button>
+  ),
 };
