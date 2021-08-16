@@ -57,7 +57,7 @@ const useStyles = (props: Props) =>
 
 interface ButtonProps {
   color: ButtonColor;
-  size: ButtonSize;
+  size?: ButtonSize;
   onClick?: () => void;
 }
 
