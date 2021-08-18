@@ -9,3 +9,8 @@ export type ProgressVariant =
 export type ButtonColor = 'primary' | 'secondary' | 'success' | 'danger';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
+
+export interface Page {
+  title: string;
+  route: string;
+}

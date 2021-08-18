@@ -3,7 +3,7 @@ import DashContent from '../../layout/DashContent/DashContent';
 
 const DashMain: React.FC = () => {
   return (
-    <DashContent title="Dashboard">This is the Dashboard for you</DashContent>
+    <DashContent code="dashboard">This is the Dashboard for you</DashContent>
   );
 };
 

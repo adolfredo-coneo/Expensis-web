@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
           <PrivateRoute path="/dashboard/finances" exact component={Finances} />
           <PrivateRoute path="/dashboard/accounts" exact component={Accounts} />
           <PrivateRoute path="/dashboard/obligations" exact component={Obligations} />
-          <PrivateRoute path="/dashboard/create-edit-account" exact component={CreateEditAccount} routeProps={{title: 'Create/Edit Account'}} />
+          <PrivateRoute path="/dashboard/create-account" exact component={CreateEditAccount} routeProps={{code: 'create-account'}} />
         </DashboardLayout>
       )}
     </>

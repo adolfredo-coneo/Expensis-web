@@ -8,11 +8,11 @@ const Accounts: React.FC = () => {
   const history = useHistory();
 
   const newAccountHandler = () => {
-    history.push('/dashboard/create-edit-account');
+    history.push('/dashboard/create-account');
   };
   return (
     <DashContent
-      title="Accounts"
+      code="accounts"
       variant="dashed"
       trailing={
         <>

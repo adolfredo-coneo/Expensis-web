@@ -1,15 +1,15 @@
 import React from 'react';
 import {
-  Breadcrumbs,
   Typography,
-  Link,
   Container,
   makeStyles,
   createStyles,
   Box,
   Grid,
 } from '@material-ui/core';
+import Breadcrumb from '../../components/UI/Breadcrumb/Breadcrumb';
 import { BorderStyle } from '../../types/ui';
+import { getPage } from '../../utils/Pages';
 
 interface StyleProps {
   borderStyle: BorderStyle;
@@ -30,33 +30,28 @@ const useStyles = makeStyles((theme) =>
     trailing: {
       textAlign: 'right',
       color: theme.palette.text.secondary,
-      
     },
   })
 );
 
 interface DashContentProps {
-  title: string;
+  code: string;
   variant?: BorderStyle;
   trailing?: JSX.Element;
 }
 
 const DashContent: React.FC<DashContentProps> = ({
-  title,
+  code,
   variant = 'solid',
   children,
   trailing,
 }) => {
   const classes = useStyles({ borderStyle: variant });
+  const { title, breadcrumb } = getPage(code);
 
   return (
     <Box m={1} height="90%" width="98%">
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" href="/">
-          Main
-        </Link>
-        <Typography color="textPrimary">{title}</Typography>
-      </Breadcrumbs>
+      <Breadcrumb title={title} breadcrumbItems={breadcrumb} />
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <Typography variant="h2" component="h2" gutterBottom>

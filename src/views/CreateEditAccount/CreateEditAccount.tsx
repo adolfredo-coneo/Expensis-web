@@ -2,13 +2,13 @@ import React from 'react';
 import DashContent from '../../layout/DashContent/DashContent';
 
 interface CreateEditAccountProps {
-  title: string;
+  code: string;
 }
 
-const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ title }) => {
+const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
   return (
-    <DashContent title={title} variant="dashed">
-      This is the {title} Content for you
+    <DashContent code={code} variant="dashed">
+      This is the Content for you
     </DashContent>
   );
 };
