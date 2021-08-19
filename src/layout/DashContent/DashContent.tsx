@@ -10,6 +10,7 @@ import {
 import Breadcrumb from '../../components/UI/Breadcrumb/Breadcrumb';
 import { BorderStyle } from '../../types/ui';
 import { getPage } from '../../utils/Pages';
+import { useLocation } from 'react-router-dom';
 
 interface StyleProps {
   borderStyle: BorderStyle;
@@ -47,11 +48,12 @@ const DashContent: React.FC<DashContentProps> = ({
   trailing,
 }) => {
   const classes = useStyles({ borderStyle: variant });
-  const { title, breadcrumb } = getPage(code);
+  const { title } = getPage(code);
+  const { pathname } = useLocation();
 
   return (
     <Box m={1} height="90%" width="98%">
-      <Breadcrumb title={title} breadcrumbItems={breadcrumb} />
+      <Breadcrumb pathname={pathname} />
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <Typography variant="h2" component="h2" gutterBottom>

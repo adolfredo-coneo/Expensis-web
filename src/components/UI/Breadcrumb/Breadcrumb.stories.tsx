@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { getPage } from '../../../utils/Pages';
 
 import Breadcrumb from './Breadcrumb';
 
@@ -21,10 +20,7 @@ const Template: ComponentStory<typeof Breadcrumb> = (args) => (
   <Breadcrumb {...args} />
 );
 
-const { title, breadcrumb } = getPage('edit-account');
-
 export const Normal = Template.bind({});
 Normal.args = {
-  title: title,
-  breadcrumbItems: breadcrumb,
+  pathname: '/dashboard/accounts/create-account',
 };

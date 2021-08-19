@@ -8,7 +8,7 @@ const Accounts: React.FC = () => {
   const history = useHistory();
 
   const newAccountHandler = () => {
-    history.push('/dashboard/create-account');
+    history.push('/dashboard/accounts/create-account');
   };
   return (
     <DashContent
