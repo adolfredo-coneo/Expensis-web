@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import DashContent from '../../layout/DashContent/DashContent';
 import Button from '../../components/UI/Button/Button';
+import TableLayout from '../../layout/TableLayout/TableLayout';
 
 const Accounts: React.FC = () => {
   const history = useHistory();
@@ -25,7 +26,7 @@ const Accounts: React.FC = () => {
         </>
       }
     >
-      This is the Accounts Content for you
+      <TableLayout />
     </DashContent>
   );
 };
