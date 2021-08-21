@@ -81,7 +81,9 @@ const rows = [
   createData('Nigeria', 'NG', 200962417, 923768),
   createData('Brazil', 'BR', 210147125, 8515767),
 ];
-interface TableLayoutProps {}
+interface TableLayoutProps<T> {
+  items: Array<T>;
+}
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -92,7 +94,9 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const TableLayout: React.FC<TableLayoutProps> = (props) => {
+const TableLayout: <T>(
+  props: TableLayoutProps<T>
+) => React.ReactElement<TableLayoutProps<T>> = ({ items }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
