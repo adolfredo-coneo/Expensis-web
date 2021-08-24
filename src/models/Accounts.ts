@@ -5,6 +5,6 @@ export interface Account {
   type: string;
   balance: number;
   currency: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -18,16 +18,18 @@ interface StyleProps {
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    content: (props: StyleProps) => ({
-      padding: theme.spacing(1),
+    box: (props: StyleProps) => ({
       width: '100%',
       height: '95%',
       backgroundColor: theme.palette.background.default,
       borderColor: theme.palette.primary.main,
       borderRadius: 4,
-      border: '3px',
+      border: '2px',
       borderStyle: props.borderStyle,
     }),
+    container: {
+      padding: theme.spacing(0),
+    },
     trailing: {
       textAlign: 'right',
       color: theme.palette.text.secondary,
@@ -64,9 +66,9 @@ const DashContent: React.FC<DashContentProps> = ({
           {trailing}
         </Grid>
       </Grid>
-      <Box border={2} className={classes.content}>
-        <Container maxWidth={false}>
-          <Box m={2}>{children}</Box>
+      <Box className={classes.box}>
+        <Container maxWidth={false} className={classes.container}>
+          <Box>{children}</Box>
         </Container>
       </Box>
     </Box>

@@ -24,8 +24,6 @@ const Dashboard: React.FC = () => {
     geSystemData();
   }, [dispatch]);
 
-  console.log(loadPercentage);
-
   return (
     <>
       {loadPercentage < 100 && (
