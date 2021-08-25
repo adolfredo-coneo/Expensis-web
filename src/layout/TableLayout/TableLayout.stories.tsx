@@ -1,16 +1,16 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentMeta, Story } from '@storybook/react';
 
 import { Account as AccountModel } from '../../models/Accounts';
-import TableLayout, { TransformTable } from './TableLayout';
+import TableLayout, { TableLayoutProps, TransformTable } from './TableLayout';
 
 export default {
   title: 'layout/TableLayout',
   component: TableLayout,
 } as ComponentMeta<typeof TableLayout>;
 
-const Template: ComponentStory<typeof TableLayout> = (args) => (
-  <TableLayout {...args} />
+const Template = <T extends {}>(): Story<TableLayoutProps<T>> => (args) => (
+  <TableLayout<T> {...args} />
 );
 
 const items: AccountModel[] = [
@@ -94,7 +94,7 @@ const headers = (): TransformTable<AccountModel> => [
   },
 ];
 
-export const Normal = Template.bind({});
+export const Normal = Template<AccountModel>().bind({});
 Normal.args = {
   items: items,
   headers: headers(),

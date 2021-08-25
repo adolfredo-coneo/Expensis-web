@@ -24,7 +24,7 @@ interface RenderColumn<T> {
 
 export type TransformTable<T> = Array<RenderColumn<T>>;
 
-interface TableLayoutProps<T> {
+export interface TableLayoutProps<T> {
   items: Array<T>;
   headers: TransformTable<T>;
 }
