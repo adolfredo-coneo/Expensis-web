@@ -57,7 +57,7 @@ const TableLayout: <T>(
 ) => React.ReactElement<TableLayoutProps<T>> = ({ items, headers }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(12);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -111,7 +111,7 @@ const TableLayout: <T>(
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[12, 25, 100]}
         component="div"
         count={items.length}
         rowsPerPage={rowsPerPage}

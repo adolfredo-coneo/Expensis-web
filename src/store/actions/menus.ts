@@ -23,6 +23,7 @@ export const requestFirebaseMenus = async () => {
       const data = menu.data();
       allMenus.push(data as Menu);
     });
+    
     return allMenus;
   } catch (error) {
     console.log('error', error);
