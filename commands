@@ -38,3 +38,6 @@ yarn
 //Material UI
 yarn add @material-ui/core
 yarn add -D storybook-addon-material-ui
+
+//Formik
+yarn add formik

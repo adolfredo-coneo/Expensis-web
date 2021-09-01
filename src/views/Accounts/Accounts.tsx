@@ -66,10 +66,10 @@ const Accounts: React.FC = () => {
       trailing={
         <>
           <Button color="danger" size="large">
-            Delete Selected Account
+            Delete Selected Accounts
           </Button>
           <Button color="primary" size="large" onClick={newAccountHandler}>
-            Createa Account
+            Create Account
           </Button>
         </>
       }
