@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
       borderStyle: props.borderStyle,
     }),
     container: {
-      padding: theme.spacing(0),
+      padding: theme.spacing(1),
     },
     trailing: {
       textAlign: 'right',
