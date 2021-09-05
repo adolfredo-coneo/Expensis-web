@@ -58,6 +58,7 @@ const useStyles = (props: Props) =>
 interface ButtonProps {
   color: ButtonColor;
   size?: ButtonSize;
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
 
@@ -70,6 +71,7 @@ export const ButtonSizeMap = {
 const Button: React.FC<ButtonProps> = ({
   color = 'primary',
   size = 'small',
+  type = 'button',
   children,
   ...rest
 }) => {
@@ -83,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
       className={classes[color]}
       {...rest}
       size="large"
+      type={type}
     >
       {children}
     </ButtonUI>

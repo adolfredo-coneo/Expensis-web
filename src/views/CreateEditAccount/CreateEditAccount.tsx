@@ -1,17 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router';
 import {
-  Button,
   createStyles,
   FormControl,
   InputAdornment,
-  InputLabel,
   makeStyles,
   MenuItem,
-  OutlinedInput,
-  Select,
   TextField,
 } from '@material-ui/core';
+import Button from '../../components/UI/Button/Button';
 
 import DashContent from '../../layout/DashContent/DashContent';
 import { Account as AccountModel } from '../../models/Accounts';
@@ -44,12 +42,13 @@ const useStyles = makeStyles((theme) =>
 );
 
 const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
+  const history = useHistory();
   const classes = useStyles();
 
   const formik = useFormik({
     initialValues: initialValues,
     validate: (values) => {
-      const errors: AccountModel = { ...initialValues };
+      const errors: any = {};
       if (!values.name) {
         errors.name = 'Required';
       }
@@ -60,7 +59,11 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
         errors.type = 'Required';
       }
       if (!values.currency) {
-        //errors.currency = 'Required';
+        errors.currency = 'Required';
+      }
+
+      if (isNaN(values.balance) || !values.balance.toString()) {
+        errors.balance = 'Must be a number';
       }
 
       return errors;
@@ -70,10 +73,14 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
     },
   });
 
+  const onCancelHandler = () => {
+    history.push('/dashboard/accounts');
+  };
+
   return (
     <DashContent code={code} variant="dashed">
       <form onSubmit={formik.handleSubmit}>
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl className={classes.formControl}>
           <TextField
             fullWidth
             id="name"
@@ -86,7 +93,7 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
             variant="outlined"
           />
         </FormControl>
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl className={classes.formControl}>
           <TextField
             fullWidth
             id="description"
@@ -101,15 +108,17 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
             variant="outlined"
           />
         </FormControl>
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="type-label">Type</InputLabel>
-          <Select
-            labelId="type-label"
+        <FormControl className={classes.formControl}>
+          <TextField
+            select
             id="type"
+            name="type"
+            label="Type"
             value={formik.values.type}
             onChange={formik.handleChange}
-            label="Type"
             error={formik.touched.type && Boolean(formik.errors.type)}
+            helperText={formik.touched.type && formik.errors.type}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>None</em>
@@ -117,17 +126,19 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
             <MenuItem value="asset">Asset</MenuItem>
             <MenuItem value="bank">Bank</MenuItem>
             <MenuItem value="wallet">Wallet</MenuItem>
-          </Select>
+          </TextField>
         </FormControl>
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="currency-label">Currency</InputLabel>
-          <Select
-            labelId="currency-label"
+        <FormControl className={classes.formControl}>
+          <TextField
+            select
             id="currency"
+            name="currency"
+            label="Currency"
             value={formik.values.currency}
             onChange={formik.handleChange}
-            label="Currency"
             error={formik.touched.currency && Boolean(formik.errors.currency)}
+            helperText={formik.touched.currency && formik.errors.currency}
+            variant="outlined"
           >
             <MenuItem value="">
               <em>None</em>
@@ -135,19 +146,29 @@ const CreateEditAccount: React.FC<CreateEditAccountProps> = ({ code }) => {
             <MenuItem value="COP">COP</MenuItem>
             <MenuItem value="USD">USD</MenuItem>
             <MenuItem value="EUR">EUR</MenuItem>
-          </Select>
+          </TextField>
         </FormControl>
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-amount"
+          <TextField
+            id="balance"
+            name="balance"
+            label="Balance"
             value={formik.values.balance}
             onChange={formik.handleChange}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            labelWidth={60}
+            error={formik.touched.balance && Boolean(formik.errors.balance)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            helperText={formik.touched.balance && formik.errors.balance}
           />
         </FormControl>
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button color="secondary" size="large" onClick={onCancelHandler}>
+          Cancel
+        </Button>
+        <Button color="primary" size="large" type="submit">
           Submit
         </Button>
       </form>
