@@ -4,6 +4,7 @@ yarn create react-app expensis-web --template typescript
 //React Router
 yarn add react-router-dom
 yarn add -D @types/react-router-dom
+yarn add -D @types/react-router
 
 //GIT
 git init
@@ -41,3 +42,7 @@ yarn add -D storybook-addon-material-ui
 
 //Formik
 yarn add formik
+
+//eslint
+yarn add -D eslint
+yarn run eslint --init

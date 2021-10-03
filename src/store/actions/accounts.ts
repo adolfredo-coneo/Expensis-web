@@ -10,7 +10,7 @@ export const requestFirebaseAccounts = async () => {
     const ref = db.collection('accounts');
 
     const accounts = await ref.get();
-    let allAccounts: Account[] = [];
+    const allAccounts: Account[] = [];
     accounts.forEach((account) => {
       const data = account.data();
       allAccounts.push(data as Account);

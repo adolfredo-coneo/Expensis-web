@@ -1,7 +1,7 @@
+import React from "react";
 import classes from "./Features.module.css";
-interface Props {}
 
-const Features = (props: Props) => {
+const Features: React.FC = () => {
   return (
     <section className={classes.features}>
       <h1>Keep track of your finances whenever you go</h1>

@@ -18,7 +18,7 @@ export const requestFirebaseMenus = async () => {
     const ref = db.collection('menus').orderBy('order', 'asc');
 
     const menus = await ref.get();
-    let allMenus: Menu[] = [];
+    const allMenus: Menu[] = [];
     menus.forEach((menu) => {
       const data = menu.data();
       allMenus.push(data as Menu);

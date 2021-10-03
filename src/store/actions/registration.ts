@@ -21,7 +21,7 @@ export const sendRegistration = (data: UserModel) => {
           .auth()
           .createUserWithEmailAndPassword(data.email, data.password);
         if (user) {
-          var currentUser = firebaseInstance.auth().currentUser;
+          const currentUser = firebaseInstance.auth().currentUser;
           if (currentUser) {
             await currentUser.updateProfile({
               displayName: data.name,

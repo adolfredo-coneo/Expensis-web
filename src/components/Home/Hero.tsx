@@ -1,9 +1,8 @@
+import React from "react";
 import { Link } from 'react-router-dom';
 import classes from './Hero.module.css';
 
-interface Props {}
-
-const Hero = (props: Props) => {
+const Hero: React.FC = () => {
   return (
     <section className={classes.hero}>
       <div className={classes.logo}>
@@ -12,7 +11,7 @@ const Hero = (props: Props) => {
       <div className={classes.info}>
         <h1>Improve your finances</h1>
         <p>
-          If you need help with your finances but aren't sure where to start,
+          If you need help with your finances but aren&apos;t sure where to start,
           seek financial wisdom from books written by experts.
         </p>
         <p>

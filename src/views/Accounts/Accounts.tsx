@@ -18,37 +18,49 @@ const headers = (): TransformTable<AccountModel> => [
     label: 'Description',
     key: 'description',
     minWidth: 250,
-    render: (account) => <span>{account.description}</span>,
+    render: function ren(account) {
+      return <span>{account.description}</span>;
+    },
   },
   {
     label: 'Type',
     key: 'type',
-    render: (account) => <span>{account.type}</span>,
+    render: function ren(account) {
+      return <span>{account.type}</span>;
+    },
   },
   {
     label: 'Balance',
     key: 'balance',
     align: 'right',
     minWidth: 80,
-    render: (account) => <span>{account.balance}</span>,
+    render: function ren(account) {
+      return <span>{account.balance}</span>;
+    },
   },
   {
     label: 'Currency',
     key: 'currency',
     minWidth: 50,
-    render: (account) => <span>{account.currency}</span>,
+    render: function ren(account) {
+      return <span>{account.currency}</span>;
+    },
   },
   {
     label: 'Created at',
     key: 'createdAt',
     minWidth: 100,
-    render: (account) => <span>{account.createdAt}</span>,
+    render: function ren(account) {
+      return <span>{account.createdAt}</span>;
+    },
   },
   {
     label: 'Updated at',
     key: 'updatedAt',
     minWidth: 100,
-    render: (account) => <span>{account.updatedAt}</span>,
+    render: function ren(account) {
+      return <span>{account.updatedAt}</span>;
+    },
   },
 ];
 

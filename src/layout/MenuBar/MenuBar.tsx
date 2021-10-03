@@ -8,9 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOutUser } from '../../store/actions/auth';
 import { layoutActions } from '../../store/slices/layout';
 
-interface MenuBarProps {}
-
-const MenuBar: React.FC<MenuBarProps> = (props) => {
+const MenuBar: React.FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const menus = useAppSelector((state) => state.layout.menus);

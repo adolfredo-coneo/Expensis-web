@@ -9,7 +9,7 @@ import { sendRegistration } from '../../store/actions/registration';
 import { layoutActions } from '../../store/slices/layout';
 import FormLayout from '../../layout/FormLayout';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -29,8 +29,6 @@ const Login = () => {
     dispatchRegisterData({
       type: 'FORM_VALIDATION',
     });
-
-    return () => {};
   }, [nameIsValid, emailIsValid, passwordIsValid]);
 
   const nameChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {

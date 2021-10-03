@@ -9,7 +9,7 @@ import { sendLogin } from '../../store/actions/auth';
 import { layoutActions } from '../../store/slices/layout';
 import FormLayout from '../../layout/FormLayout';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -26,8 +26,6 @@ const Login = () => {
     dispatchLoginData({
       type: 'FORM_VALIDATION',
     });
-
-    return () => {};
   }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {

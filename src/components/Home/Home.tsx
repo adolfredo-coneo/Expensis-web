@@ -6,9 +6,7 @@ import Main from './Main';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
-interface HomeProps {}
-
-const Home: React.FC<HomeProps> = (props) => {
+const Home: React.FC = () => {
 
   return (
     <Layout>

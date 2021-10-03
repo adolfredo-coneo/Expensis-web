@@ -1,10 +1,9 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Navigation.module.css';
 import { useAppSelector } from '../../store/hooks';
 
-interface Props {}
-
-const Navigation = (props: Props) => {
+const Navigation: React.FC = () => {
   const user = useAppSelector((state) => state.auth);
 
   return (

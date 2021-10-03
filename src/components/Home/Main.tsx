@@ -1,11 +1,10 @@
+import React from "react";
 import Features from "./Features";
 import Hero from "./Hero";
 
 import classes from "./Main.module.css";
 
-interface Props {}
-
-const Main = (props: Props) => {
+const Main: React.FC = () => {
   return (
     <main className={classes.main}>
       <Hero />
