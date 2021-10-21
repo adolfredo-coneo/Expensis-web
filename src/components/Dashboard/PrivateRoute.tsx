@@ -6,7 +6,7 @@ interface PrivateRouteProps {
   component: React.ElementType;
   path: string;
   exact?: boolean;
-  routeProps?: any;
+  routeProps?: unknown;
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({

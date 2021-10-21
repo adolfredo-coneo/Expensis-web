@@ -15,7 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase
 let instance: firebase.app.App;
 
-export default function getFirebase() {
+export default function getFirebase(): firebase.app.App | null {
   if (typeof window !== 'undefined') {
     if (instance) return instance;
     instance = firebase.initializeApp(firebaseConfig);

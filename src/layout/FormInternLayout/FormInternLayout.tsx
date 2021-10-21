@@ -3,29 +3,30 @@ import { useFormik } from 'formik';
 import {
   createStyles,
   FormControl,
-  InputAdornment,
   makeStyles,
   MenuItem,
   TextField,
 } from '@material-ui/core';
 
 import Button from '../../components/UI/Button/Button';
-import { Account as AccountModel } from '../../models/Accounts';
 
-const initialValues: AccountModel = {
-  id: 0,
-  name: '',
-  description: '',
-  type: '',
-  balance: 0,
-  currency: '',
-  createdAt: '',
-  updatedAt: '',
-};
+interface RenderForm<T> {
+  key: keyof T;
+  label: string;
+  error: boolean;
+  select?: boolean;
+  options?: string[];
+  startAdornment?: React.ReactElement;
+}
 
-interface FormInternLayoutProps {
-  onSubmit: (values: AccountModel) => void;
+export type TransformForm<T> = Array<RenderForm<T>>;
+
+interface FormInternLayoutProps<T> {
+  initialValues: T;
+  fields: TransformForm<T>;
+  onSubmit: (values: T) => void;
   onCancel: () => void;
+  validate: (values: T) => void;
 }
 
 const useStyles = makeStyles((theme) =>
@@ -40,123 +41,58 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const FormInternLayout: React.FC<FormInternLayoutProps> = ({
+const FormInternLayout: <T>(
+  props: FormInternLayoutProps<T>
+) => React.ReactElement<FormInternLayoutProps<T>> = ({
+  initialValues,
+  fields,
   onSubmit,
   onCancel,
+  validate,
 }) => {
   const classes = useStyles();
 
   const formik = useFormik({
-    initialValues: initialValues,
-    validate: (values) => {
-      const errors: any = {};
-      if (!values.name) {
-        errors.name = 'Required';
-      }
-      if (!values.description) {
-        errors.description = 'Required';
-      }
-      if (!values.type) {
-        errors.type = 'Required';
-      }
-      if (!values.currency) {
-        errors.currency = 'Required';
-      }
-
-      if (isNaN(values.balance) || !values.balance.toString()) {
-        errors.balance = 'Must be a number';
-      }
-
-      return errors;
-    },
+    initialValues,
+    validate,
     onSubmit,
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <FormControl className={classes.formControl}>
-        <TextField
-          fullWidth
-          id="name"
-          name="name"
-          label="Name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          error={formik.touched.name && Boolean(formik.errors.name)}
-          helperText={formik.touched.name && formik.errors.name}
-          variant="outlined"
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <TextField
-          fullWidth
-          id="description"
-          name="description"
-          label="Description"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.description && Boolean(formik.errors.description)
-          }
-          helperText={formik.touched.description && formik.errors.description}
-          variant="outlined"
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <TextField
-          select
-          id="type"
-          name="type"
-          label="Type"
-          value={formik.values.type}
-          onChange={formik.handleChange}
-          error={formik.touched.type && Boolean(formik.errors.type)}
-          helperText={formik.touched.type && formik.errors.type}
-          variant="outlined"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="asset">Asset</MenuItem>
-          <MenuItem value="bank">Bank</MenuItem>
-          <MenuItem value="wallet">Wallet</MenuItem>
-        </TextField>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <TextField
-          select
-          id="currency"
-          name="currency"
-          label="Currency"
-          value={formik.values.currency}
-          onChange={formik.handleChange}
-          error={formik.touched.currency && Boolean(formik.errors.currency)}
-          helperText={formik.touched.currency && formik.errors.currency}
-          variant="outlined"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="COP">COP</MenuItem>
-          <MenuItem value="USD">USD</MenuItem>
-          <MenuItem value="EUR">EUR</MenuItem>
-        </TextField>
-      </FormControl>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <TextField
-          id="balance"
-          name="balance"
-          label="Balance"
-          value={formik.values.balance}
-          onChange={formik.handleChange}
-          error={formik.touched.balance && Boolean(formik.errors.balance)}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-          variant="outlined"
-          helperText={formik.touched.balance && formik.errors.balance}
-        />
-      </FormControl>
+      {fields.map(({ key, label, select, options, startAdornment }) => {
+        const { values } = formik;
+        const value = values[key];
+        const errorMessage = formik.errors[key];
+        const touched = formik.touched[key];
+
+        return (
+          <FormControl key={key as string} className={classes.formControl}>
+            <TextField
+              id={key as string}
+              label={label}
+              error={touched && Boolean(errorMessage)}
+              value={value}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              select={select}
+              helperText={errorMessage}
+              InputProps={{
+                startAdornment,
+              }}
+              fullWidth
+            >
+              {select &&
+                options &&
+                options.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+            </TextField>
+          </FormControl>
+        );
+      })}
       <Button color="secondary" size="large" onClick={onCancel}>
         Cancel
       </Button>

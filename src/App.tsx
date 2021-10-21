@@ -10,7 +10,7 @@ import { getCurrentUser } from './store/actions/auth';
 
 let isInitial = true;
 
-function App() {
+function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth);
 
